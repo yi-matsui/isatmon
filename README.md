@@ -156,4 +156,4 @@ THIRD_PARTY_LICENSES/   同梱ライブラリのライセンス
 
 ## サードパーティ
 
-- [Chart.js](https://www.chartjs.org/) 4.5.1 (MIT) ? ライセンスは [THIRD_PARTY_LICENSES](THIRD_PARTY_LICENSES/Chart.js-LICENSE.md)
+- [Chart.js](https://www.chartjs.org/) 4.5.1 (MIT)  ライセンスは [THIRD_PARTY_LICENSES](THIRD_PARTY_LICENSES/Chart.js-LICENSE.md)
