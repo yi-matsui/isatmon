@@ -1,28 +1,38 @@
-# isatmon
+# **IsatMon** 
 
-Inmarsat **IsatPhone 2** の信号状態を、ブラウザで監視する小さなツールです。
-Windows 11 に最初から入っているものだけで動き、インターネットにつながらない環境でも使えます。
+## `ATコマンド電話`で受信状態を監視する小さなツールです。
+Windows 11 に最初から入っているものだけで動き、インターネットにつながらない環境で使います。
 
 C# で書いているのは「AT コマンドを 1 つ送って応答を返す」`IsatIo.exe` だけです。
 どのコマンドを送り、結果をどう解釈し、どう表示するかは、PowerShell・設定ファイル・HTML 側にあります。
 C# を書ける人がいなくても保守できる構成です。
 
+## 評価版のイメージ
+
+* まずは基本動作を確認するための最小機能を目指す。
+
 ![dashboard](docs/dashboard.png)
+
+## 将来の構想
+
+* 最小動作ができた時点で本格的な表示に作り直す。
+
+![FutureDashboard](docs/FutureDashboard.png)
 
 ## 特長
 
-- **Web サーバ不要** — `index.html` をダブルクリックで開くだけ。収集側が `data.js` を書き出し、画面がそれを読みます
-- **AT コマンドは外出し** — 追加したい項目は設定ファイルに 1 行足すだけ
-- **実機なしで試せる** — 疑似データの `-Mock` モード
-- **対応コマンドの調査ツール** — `Probe.bat` が機器の対応状況を一覧にします
-- **止まったことに気づける** — 更新が止まると、画面右上が **STALE**(赤)になります
-- **完全オフライン** — Chart.js を同梱しています
+- **Web サーバ不要** ? `index.html` をダブルクリックで開くだけ。収集側が `data.js` を書き出し、画面がそれを読みます
+- **AT コマンドは外出し** ? 追加したい項目は設定ファイルに 1 行足すだけ
+- **実機なしで試せる** ? 疑似データの `-Mock` モード
+- **対応コマンドの調査ツール** ? `Probe.bat` が機器の対応状況を一覧にします
+- **止まったことに気づける** ? 更新が止まると、画面右上が **STALE**(赤)になります
+- **完全オフライン** ? Chart.js を同梱しています
 
 ## 仕組み
 
 ```
-[IsatPhone 2] ──COM── IsatIo.exe ◄── Monitor.ps1 ──┬─► data.js        ◄── index.html (ブラウザ)
-                      (I/O だけ)     (収集ループ)    └─► logs/isat_YYYYMM.csv
+[IsatPhone 2] ──COM── IsatIo.exe ?── Monitor.ps1 ──┬─? data.js        ?── index.html (ブラウザ)
+                      (I/O だけ)     (収集ループ)    └─? logs/isat_YYYYMM.csv
 ```
 
 設計の詳細は [docs/architecture.md](docs/architecture.md)、AT コマンドの対応範囲と調べ方は [docs/at-commands.md](docs/at-commands.md) を参照してください。
@@ -35,13 +45,13 @@ Windows 11(Windows PowerShell 5.1 と .NET Framework 4.x が標準で入って�
 
 `app/` フォルダの中で作業します。
 
-1. **`build.bat`** — `IsatIo.exe` を作ります(Windows 標準の `csc.exe` を使用)
+1. **`build.bat`** ? `IsatIo.exe` を作ります(Windows 標準の `csc.exe` を使用)
    - できたら `IsatIo.exe -HELP` を実行すると、使い方と引数の説明が表示されます
-2. **`MonitorMock.bat`** — 疑似データでダッシュボードが動くことを確認します
+2. **`MonitorMock.bat`** ? 疑似データでダッシュボードが動くことを確認します
 3. 実機につなぐ
    1. `Monitor.bat` を一度起動すると、`Config.ps1` が自動で作られます。止めて、`$Port` を実際の COM 番号に直します
-   2. **`Probe.bat`** — 機器が対応している AT コマンドを調べます
-   3. **`Monitor.bat`** — 実機の値で動きます
+   2. **`Probe.bat`** ? 機器が対応している AT コマンドを調べます
+   3. **`Monitor.bat`** ? 実機の値で動きます
 
 社内ネットワークなど外部につながらない PC へは、`app/` フォルダごとコピーすれば動きます。
 USB メモリを使えない場合は、Git(または GitHub の ZIP)経由で導入します。手順は [docs/deploy-via-git.md](docs/deploy-via-git.md) を参照してください。
@@ -142,8 +152,8 @@ THIRD_PARTY_LICENSES/   同梱ライブラリのライセンス
 
 ## ライセンス
 
-[MIT License](LICENSE) — Copyright (c) 2026 Yuichi Matsui (JH0VEQ)
+[MIT License](LICENSE) ? Copyright (c) 2026 Yuichi Matsui (JH0VEQ)
 
 ## サードパーティ
 
-- [Chart.js](https://www.chartjs.org/) 4.5.1 (MIT) — ライセンスは [THIRD_PARTY_LICENSES](THIRD_PARTY_LICENSES/Chart.js-LICENSE.md)
+- [Chart.js](https://www.chartjs.org/) 4.5.1 (MIT) ? ライセンスは [THIRD_PARTY_LICENSES](THIRD_PARTY_LICENSES/Chart.js-LICENSE.md)
