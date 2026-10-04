@@ -1,0 +1,14 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+
+# Windows PowerShell 5.1 / csc.exe は BOM なしを ANSI(cp932) と誤読するため BOM 付き
+[*.{ps1,cs,txt}]
+charset = utf-8-bom
+
+[*.md]
+end_of_line = lf
+charset = utf-8

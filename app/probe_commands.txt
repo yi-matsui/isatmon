@@ -1,0 +1,35 @@
+﻿# Probe.bat が順に送るコマンド (1 行 1 コマンド。# で始まる行は無視)
+# 読み出し・問い合わせ系だけにしてください。
+# 入れてはいけない例: ATD(発信) / ATZ・AT&F(設定リセット) / AT+CFUN(機能切替) / AT+CPWROFF /
+#                     AT+CGPS=1 のような「設定・起動」系
+#
+# --- 基本 (V.250) ---
+AT
+ATI
+# --- 機器情報 (3GPP TS 27.007) ---
+AT+CGMI
+AT+CGMM
+AT+CGMR
+# --- 対応コマンド一覧 (対応していれば、ここに全部出ます。GPS/GNSS/POS/LOC を含むものを探す) ---
+AT+CLAC
+# --- 信号・登録状態 ---
+AT+CSQ
+AT+CSQ=?
+AT+CREG?
+AT+CREG=?
+AT+CGREG?
+AT+COPS?
+AT+CGATT?
+# --- 機器状態 ---
+AT+CPAS
+AT+CPIN?
+AT+CBC
+AT+CLCC
+# --- GPS 探索 (他社モジュールでの例。IsatPhone 2 が対応しているかは不明) ---
+AT+CGPS?
+AT+CGPSINFO
+AT+CGNSINF
+AT+QGPS?
+AT+GPSINFO
+# --- 参考: シリアル番号(IMEI等)が出ます。結果ファイルの扱いに注意 ---
+# AT+CGSN
